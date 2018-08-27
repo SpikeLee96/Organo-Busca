@@ -1,0 +1,13 @@
+﻿@model Organobusca_.Models.Cliente
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<h2>Login</h2>
+<div>
+    @Html.TextBoxFor(m => m.email)
+    @Html.TextBoxFor(m => m.senha)
+</div>
+
