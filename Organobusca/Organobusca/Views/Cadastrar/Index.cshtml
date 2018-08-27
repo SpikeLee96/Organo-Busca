@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+    ViewBag.Title = "Cadastrar";
+}
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>Cadastro | Organobusca</title>
+</head>
+<body>
+    <div> 
+        @Html.ActionLink("Cliente","Cliente", "Cadastrar")
+    </div>
+    <div>
+        @Html.ActionLink("Feirante", "Feirante", "Cadastrar")
+    </div>
+</body>
+</html>

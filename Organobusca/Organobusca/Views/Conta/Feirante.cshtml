@@ -1,0 +1,51 @@
+﻿@model Organobusca.Models.Feirante
+
+@{
+    ViewBag.Title = "Minha conta";
+    Layout = "~/Views/Shared/_DashboardFeiranteLayout.cshtml";
+}
+
+<h1>Minha conta</h1>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.url_foto)
+        </dt>
+
+        <dd>
+            <img src="~/Content/ProfilePictures/user.jpg" alt="@Model.nome" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Feira.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feira.nome)
+        </dd>*@
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar meus dados", "Index", "Editar",  null, new { @class="btn btn-success" })
+</p>
+<p>
+    @Html.ActionLink("Deletar minha conta", "DeletarFeirante", "Editar", new { id = Model.id }, new { @class = "btn btn-success" })
+</p>

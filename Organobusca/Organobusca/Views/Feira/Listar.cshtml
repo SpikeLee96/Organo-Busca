@@ -1,0 +1,109 @@
+﻿@model List<Organobusca.Models.Feira>
+
+@{
+    ViewBag.Title = "Listar feiras";
+    Layout = "~/Views/Shared/_DashboardFeiranteLayout.cshtml";
+}
+
+<div style="display:inline-block;"><h2>Todas as feiras</h2></div>
+<div style="display:inline-block; float:right;">
+    @Html.ActionLink("Criar", "Criar", null, new { @class = "btn btn-success" })
+</div>
+
+<table class="table">
+    <thead>
+        <th><b>Nome</b></th>
+        <th><b>Rua</b></th>
+        <th><b>Cidade</b></th>
+        <!-- <th><b>Bairro</b></th> -->
+        <th><b>CEP</b></th>
+        <th><b>Horário de funcionamento</b></th>
+        <th></th>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        string[] semana = { "", "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.nome</td>
+                <td>@item.rua</td>
+                <td>@item.cidade</td>
+                <td>@item.cep</td>
+                <td>
+                    @foreach (var dia in item.DiaDaSemana)
+                    {
+                        string campo = semana[@dia.dia] + " das " + @dia.hora_inicio.ToString(@"hh\:mm") + "h às " + @dia.hora_fim.ToString(@"hh\:mm") + "h";
+                        <div>@campo</div>
+                    }
+                </td>
+                <td>@Html.ActionLink("Excluir", "Excluir", "Feira", new { id= item.id }, null)</td>
+
+
+
+            </tr>
+        }
+    }
+    </tbody>
+
+</table>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nome)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.nome)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.bairro)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.bairro)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.cidade)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.cidade)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.rua)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.rua)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.cep)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.cep)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.numero)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.numero)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.longitude)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.longitude)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.latitude)
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.latitude)
+        </td>
+        @*<th>
+            @Html.ActionLink("Edit", "Editar", new { id = item.id }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id = item.id }) |
+            @Html.ActionLink("Apagar", "Delet", new { id = item.id })
+        </th>*@
+        @*<th></th>
+    </tr>
+</table>*@

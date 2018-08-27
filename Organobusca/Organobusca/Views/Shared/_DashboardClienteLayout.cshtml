@@ -1,0 +1,84 @@
+﻿@using Organobusca.Util
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>@ViewBag.Title | Organobusca</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link href="~/Content/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/dashboard.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <link href="carousel.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top ob-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="~/Content/Images/logo.png" alt="Organobusca" />
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="dropdown">
+                        @*@HttpContext.Current.User.Identity.Name*@
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Html.GetUserName(HttpContext.Current.Session) <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Minha conta", "Cliente", "Conta")</li> 
+                            <li>@Html.ActionLink("Sair", "Logout", "Login")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Pesquisar feiras...">
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+
+                    <li class="active"><a href="@Url.Action("Index", "Dashboard")"><span class="glyphicon glyphicon-leaf"></span>Dashboard <span class="sr-only">(current)</span></a></li>
+                    <li><a href="@Url.Action("Cliente","Conta")"><span class="glyphicon glyphicon-user"></span>Minha conta</a></li>
+                    <li><a href="@Url.Action("panorama","Dashboard")"><span class="glyphicon glyphicon-wrench"></span>Novidades</a></li>
+                    <li><a href="@Url.Action("ajudaCliente", "Dashboard")"><span class="glyphicon glyphicon-question-sign"></span>Ajuda</a></li>
+                </ul>
+                <br />
+                <br />
+                <br />
+                <img width="170" height="170" src="http://www.portaltribunadonorte.com/images/publicidades/1701481117.jpg" />
+            </div>
+            
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

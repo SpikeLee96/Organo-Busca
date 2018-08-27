@@ -1,0 +1,66 @@
+﻿@model Organobusca.Models.Feira
+
+<div>
+    <h3>@Html.DisplayFor(model => model.nome)</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            <label>Horários</label>
+        </dt>
+        <dd>
+            @foreach (var dia in Model.DiaDaSemana)
+            {
+                string[] semana = { "", "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+                string campo = semana[@dia.dia] + " das " + @dia.hora_inicio.ToString(@"hh\:mm") + "h às " + @dia.hora_fim.ToString(@"hh\:mm") + "h";
+                <div>@campo</div>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bairro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bairro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cep)
+        </dd>
+
+    </dl>
+    <div id="avaliacao">
+        <h4>Avaliar</h4>
+        <p>Escreva uma avaliação sobre essa feira</p>
+        <textarea name="comentario" placeholder="Comentário"></textarea>
+        <p>Avalie esta feira:</p>
+        <input name="pontuacao" type="range" min="0" max="5" />
+    </div>
+</div>

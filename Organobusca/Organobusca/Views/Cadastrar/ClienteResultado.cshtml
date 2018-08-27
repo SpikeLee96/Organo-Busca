@@ -1,0 +1,51 @@
+﻿@model Organobusca.Models.Cliente
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ClienteResultado</title>
+</head>
+<body>
+
+    <div>
+        <h4>Cliente</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                <b>@Html.DisplayNameFor(model => model.nome)</b>
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.nome)
+            </dd>
+    
+            <dt>
+                <b>@Html.DisplayNameFor(model => model.email)</b>
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+    
+            <dt>
+                <b>@Html.DisplayNameFor(model => model.url_foto)</b>
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.url_foto)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Voltar para página inicial", "Index")
+    </p>
+</body>
+</html>

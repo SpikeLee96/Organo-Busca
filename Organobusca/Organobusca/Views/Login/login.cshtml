@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Content/login.css" />
+</head>
+<body>
+    <div class="wrapper"> 
+        @using (Html.BeginForm("login", "Login", FormMethod.Post, new { @class = "form-signin"} ))
+        {
+            @Html.ValidationSummary()
+            <h2 class="form-signin-heading">Entrar</h2>
+            
+            <label class="sr-only" for="inputEmail">Email</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+            
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha" required>
+            
+            <button class="btn btn-lg btn-primary btn-block btn-login" type="submit">Login</button>
+        }
+    </div>
+</body>
+</html>

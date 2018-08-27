@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_DashboardFeiranteLayout.cshtml";
+}
+<style>
+    #map {
+        width: 100%;
+        height: 320px;
+        padding: 10px;
+    }
+</style>
+<h2>Dashboard</h2>
+<p>Feiras perto de mim</p>
+
+<div>
+    <div id="map"></div>
+    <div id="partial_details">
+        <p>Clique em uma feira para ver detalhes...</p>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -8.0624203, lng: -34.9270747 }, /* Recife */
+                zoom: 11,
+                zoomControl: true,
+                mapTypeControl: false,
+                scaleControl: true,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: true
+            })
+
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "@Url.Action("FeirasJson")",
+                success: function (feiras) {
+                    mostrarFeiras(map, feiras);
+                }
+            });
+
+            function mostrarDetalhesFeira(feira_id) {
+                $("#partial_details").load("/Dashboard/MostrarDetalhes/" + feira_id);
+            }
+
+            var markerList = [];
+            var infowindowList = [];
+
+            function closeAllInfoWindows() {
+                for (let i = 0; i < infowindowList.length; i++) {
+                    infowindowList[i].close();
+                }
+            }
+            function mostrarFeiras(map, feiras) {
+                for (let i = 0; i < feiras.length; i++) {
+                    markerList[i] = new google.maps.Marker({
+                        map: map,
+                        position: { lat: feiras[i]["Latitude"], lng: feiras[i]["Longitude"] },
+                        draggable: false
+                    })
+                    infowindowList[i] = new google.maps.InfoWindow({
+                        content: feiras[i]["Nome"]
+                    })
+                    google.maps.event.addListener(markerList[i], "click", function (a) {
+                        return function () {
+                            closeAllInfoWindows();
+                            infowindowList[a].open(map, markerList[a]);
+                            map.setCenter(markerList[a].getPosition());
+                            map.setZoom(13);
+                            mostrarDetalhesFeira(feiras[i]["Id"]);
+                        }
+                    }(i));
+                }
+            }
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs3V5BDT2RqWxKznEvIBdT4WKNQ5_lLf0&callback=initMap" async defer></script>
+}
